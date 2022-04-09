@@ -2,7 +2,6 @@ package com.project.honeycombi.service;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.repository.UserRepository;
