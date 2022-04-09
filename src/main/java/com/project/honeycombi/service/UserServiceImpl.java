@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> signin(User user) {
       
-       Optional<User> opt = userRepository.findbyEmailAndPwd(user.getEmail(), user.getPwd());
+       Optional<User> opt = userRepository.findByEmailAndPwd(user.getEmail(), user.getPwd());
        
         return opt;
     }
