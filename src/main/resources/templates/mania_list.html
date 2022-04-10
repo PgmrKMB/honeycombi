@@ -15,8 +15,13 @@
             <th>조회</th>
             <th>추천</th>
         </tr>
-        <tr>
-            <td></td>
+        <tr th:each="mania : ${list}">
+            <td th:text="${mania.mTitle}"></td>
+            <td th:text="${mania.mContent}"></td>
+            <td th:text="${mania.user.nickname}"></td>
+            <td th:text="${mania.createDate}"></td>
+            <td>test</td>
+            <td>test</td>
         </tr>
     </table>
 </body>
