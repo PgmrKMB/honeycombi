@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/sign")
+    @GetMapping("/")
     public String signForm() {
         return "sign";
     }

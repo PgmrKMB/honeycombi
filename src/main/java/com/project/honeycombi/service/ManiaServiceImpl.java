@@ -2,6 +2,7 @@ package com.project.honeycombi.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +41,14 @@ public class ManiaServiceImpl implements ManiaService {
 
         maniaRepository.save(mania);
 
+    }
+
+    @Override
+    public Optional<Mania> maniaDetail(Long mId) {
+
+        Optional<Mania> opt = maniaRepository.findById(mId);
+
+        return opt;
     }
 
 }

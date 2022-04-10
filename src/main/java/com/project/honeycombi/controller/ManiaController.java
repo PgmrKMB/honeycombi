@@ -2,6 +2,7 @@ package com.project.honeycombi.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,6 +49,16 @@ public class ManiaController {
         maniaService.ManiaWrite(mania, session);
 
         return "redirect:/mania";
+    }
+
+    @GetMapping(value = "/mania/detail")
+    public String maniaDetail(Model model, Long mId) {
+
+        Optional<Mania> opt = maniaService.maniaDetail(mId);
+
+        model.addAttribute("mania", opt.get());
+
+        return "mania_detail";
     }
 
 }
