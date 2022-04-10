@@ -30,7 +30,7 @@ public class UserController {
 
         userService.singup(user);
 
-        return "redirect:/main";
+        return "redirect:/sign";
     }
 
     @PostMapping(value = "/signin")
@@ -40,7 +40,9 @@ public class UserController {
 
         session.setAttribute("user", opt.get());
 
-        return "redirect:/sign";
+        System.out.println(opt.get().getNickname());
+
+        return "redirect:/main";
     }
 
     @GetMapping("/signout")

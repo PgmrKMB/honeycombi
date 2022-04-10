@@ -36,7 +36,7 @@ public class ManiaController {
         return "mania_list";
     }
 
-    @GetMapping(value = "/maina/write")
+    @GetMapping(value = "/mania/write")
     public String maniaWriteForm() {
 
         return "mania_write";
