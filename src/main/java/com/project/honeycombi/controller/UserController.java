@@ -30,7 +30,7 @@ public class UserController {
 
         userService.singup(user);
 
-        return "redirect:/sign";
+        return "redirect:/";
     }
 
     @PostMapping(value = "/signin")

@@ -9,15 +9,15 @@
 
 <body>
     <h1 th:text="${mania.mTitle}"></h1>
-    <div th:text="${mania.mContent}"></div>
+    <div th:text="|글내용 : ${mania.mContent}|"></div>
     <div>
-        <div th:text="${mania.user.nickname}"></div>
-        <div th:text="${mania.createDate}"></div>
+        <div>작성자 : [[${mania.user.nickname}]]</div>
+        <div>작성일 : [[${mania.createDate}]]</div>
     </div>
 
     <div th:if="${session.user.nickname} == ${mania.user.nickname}">
-        <a th:href="@{/mania/update(mId=${param.mId})}" >수정</a>
-        <a th:href="@{/question/delete(mId=${param.mId})}" >삭제</a>
+        <a th:href="@{/mania/update(mId=${param.mId})}">수정</a>
+        <a th:href="@{/question/delete(mId=${param.mId})}">삭제</a>
     </div>
 
 
