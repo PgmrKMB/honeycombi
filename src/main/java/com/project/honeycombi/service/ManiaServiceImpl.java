@@ -50,41 +50,44 @@ public class ManiaServiceImpl implements ManiaService {
         mania.setCreateDate(new Date());
         maniaRepository.save(mania);
 
-        Iterator<String> iter = mRequest.getFileNames();
-        while (iter.hasNext()) {
-            String inputName = iter.next();
-            List<MultipartFile> mFiles = mRequest.getFiles(inputName);
-            for (MultipartFile mFile : mFiles) {
-                String oName = mFile.getOriginalFilename();
-                if (oName == null || oName.equals("")) {
-                    break;
-                }
-
-                File f = new File("c:/hrdkmb/SMP/honeycombi/src/main/resources/static/uploade" + oName);
-                String sName = "";
-
-                if (f.isFile()) {
-                    String fileName = oName.substring(0, oName.lastIndexOf("."));
-                    String fileExt = oName.substring(oName.lastIndexOf("."));
-                    sName = fileName + (System.currentTimeMillis() / 1000) + fileExt;
-                } else {
-                    sName = oName;
-                }
-                try {
-                    ManiaFile mf = new ManiaFile();
-                    mf.setOriginalFileName(oName);
-                    mf.setSaveFileName(sName);
-                    mf.setMania(mania);
-                    maniaFileRepository.save(mf);
-
-                    mFile.transferTo(new File("c:/hrdkmb/SMP/honeycombi/src/main/resources/static/uploade" + oName));
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace(); 
-                }
-            }
+        /* 첨부파일 저장 및 DB 저장 */
+    Iterator<String> iter = mRequest.getFileNames();
+    while (iter.hasNext()) {
+      String inputName = iter.next();
+      List<MultipartFile> mFiles = mRequest.getFiles(inputName);
+      for (MultipartFile mFile : mFiles) {
+        String oName = mFile.getOriginalFilename();
+        if (oName == null || oName.equals("")) {
+          break;
         }
+
+        /* 중복파일 검사 - 파일명 변경 */
+        File f = new File("c:/study/" + oName);
+        String sName = "";
+
+        if (f.isFile()) { // 파일이 존재하는가?
+          String fileName = oName.substring(0, oName.lastIndexOf("."));
+          String fileExt = oName.substring(oName.lastIndexOf("."));
+          sName = fileName + System.currentTimeMillis() + fileExt;
+        } else {
+          sName = oName;
+        }
+
+        try {
+          ManiaFile mf = new ManiaFile();
+          mf.setOriginalFileName(oName);
+          mf.setSaveFileName(sName);
+          mf.setMania(mania);
+          maniaFileRepository.save(mf);
+
+          mFile.transferTo(new File("c:/study/" + oName));
+        } catch (IllegalStateException e) {
+          e.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
 
     }
 
@@ -94,6 +97,13 @@ public class ManiaServiceImpl implements ManiaService {
         Optional<Mania> opt = maniaRepository.findById(mId);
 
         return opt;
+    }
+
+    @Override
+    public List<ManiaFile> download(Mania mania) {
+      
+     List<ManiaFile> fList = maniaFileRepository.findByMania(mania);
+      return fList;
     }
 
 }

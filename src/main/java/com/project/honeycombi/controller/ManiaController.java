@@ -1,14 +1,25 @@
 package com.project.honeycombi.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.Mania;
+import com.project.honeycombi.model.ManiaFile;
 import com.project.honeycombi.service.ManiaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,5 +76,27 @@ public class ManiaController {
 
         return "mania_detail";
     }
+
+
+    @GetMapping("/download")
+    public ResponseEntity<Resource> download(@ModelAttribute Mania mania) throws Exception{
+
+        List<ManiaFile> fList = maniaService.download(mania);
+
+        String fileName = fList.get(0).getSaveFileName();
+        File file = new File("c:/study/" + fileName);
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+
+        return ResponseEntity.ok()
+     .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
+     .contentLength(file.length())
+     .contentType(
+         MediaType.parseMediaType("application/octet-stream"))
+     .body(resource);
+    }
+
+    
 
 }
