@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매니아 게시판</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성일</th>
+            <th>조회</th>
+            <th>추천</th>
+        </tr>
+        <tr th:each="mania : ${list}">
+            <td th:text="${mania.mId}"></td>
+            <td><a th:href="@{/mania/detail(mId=${mania.mId})}" th:text="${mania.mTitle}"></a></td>
+            <td th:text="${mania.user.nickname}"></td>
+            <td th:text="${mania.createDate}"></td>
+            <td>test</td>
+            <td>test</td>
+        </tr>
+    </table>
+</body>
+</html>
