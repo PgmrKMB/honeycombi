@@ -20,8 +20,8 @@
       <ul class="navbar-nav">
         <li class="nav-item ">
           <a th:if="${session.user != null}" class="nav-link" th:href="@{/signout}"
-            th:text="${session.user.name} + ' (로그아웃)'"></a>
-          <a th:unless="${session.user != null}" class="nav-link" th:href="@{/signin}" th:text="로그인"></a>
+            th:text="${session.user.nickname} + ' (로그아웃)'"></a>
+          <a th:unless="${session.user != null}" class="nav-link" th:href="@{/}" th:text="로그인"></a>
         </li>
       </ul>
     </div>
@@ -31,15 +31,15 @@
     <form method="post" class="post-form my-3" 
           enctype="multipart/form-data">
       <div class="form-group">
-        <label for="subject">제목</label>
-        <input type="text" class="form-control" name="subject" id="subject">
+        <label for="vSubject">제목</label>
+        <input type="text" class="form-control" name="vSubject" id="subject">
       </div>
       <div class="form-group">
-        <label for="content">내용</label>
-        <textarea class="form-control" name="content" id="content" rows="10"></textarea>
+        <label for="vContent">내용</label>
+        <textarea class="form-control" name="vContent" id="content" rows="10"></textarea>
       </div>
       <div class="form-group">
-        <label for="content">첨부파일</label>
+        <label for="vContent">첨부파일</label>
         <input class="form-control" name="file" 
           id="file" type="file"
           accept="image/jpeg, image/png, image/*">

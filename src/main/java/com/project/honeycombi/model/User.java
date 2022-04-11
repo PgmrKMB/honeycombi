@@ -26,4 +26,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<Mania> manias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    List<Vegan> vegans = new ArrayList<>();
+ 
 }
