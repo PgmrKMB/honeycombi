@@ -28,7 +28,7 @@ public class UserController {
     @PostMapping(value = "/signup")
     public String signup(@ModelAttribute User user) {
 
-        userService.singup(user);
+        userService.signup(user);
 
         return "redirect:/";
     }
