@@ -6,12 +6,14 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import com.project.honeycombi.model.Mania;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 public interface ManiaService {
 
     List<Mania> maniaList(int page);
 
-    void ManiaWrite(Mania mania, HttpSession session);
+    void ManiaWrite(Mania mania, HttpSession session, MultipartHttpServletRequest mRequest);
 
     Optional<Mania> maniaDetail(Long mId);
 
