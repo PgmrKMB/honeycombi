@@ -31,14 +31,14 @@
             <tr th:each="vegan : ${list}" style="text-align: center;">
                 <td th:text="${vegan.vId}"></td>
                 <td><a th:href="@{/vegan/detail(vId=${vegan.vId})}" th:text="${vegan.vSubject}"></a></td>
-                <!-- <td><a href="vegan_vContent?vId=${vegan.vId}">${vegan.vSubject}</a></td> -->
                 <td th:text="${vegan.user.nickname}"></td>
                 <td th:text="${vegan.createDate}"></td>
 
-                <!-- <td th:text="${vegan.user.nickname}"></td> -->
+                
             </tr>
         </table>
     </div>
+    <button onclick="location.href='/vegan/create'">글쓰기</button>
 
 
 </body>

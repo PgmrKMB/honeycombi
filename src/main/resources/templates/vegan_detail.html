@@ -16,6 +16,7 @@
 
     <th:block th:if="${session.user.nickname!=null}">
         <div th:if="${session.user.nickname} == ${vegan.user.nickname}">
+            <a th:href="@{/vegan/update(vId=${vegan.vId})}">수정하기</a>
             <a th:href="@{/vegan/delete(vId=${vegan.vId})}">삭제하기</a>
         </div>
     </th:block>

@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.File;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.model.Vegan;
+import com.project.honeycombi.model.VeganFile;
+import com.project.honeycombi.repository.VeganFileRepository;
 import com.project.honeycombi.repository.VeganRepository;
 import com.project.honeycombi.service.VeganService;
 
@@ -28,6 +34,9 @@ public class VeganController {
 	@Autowired
 	VeganService veganService;
 
+	@Autowired
+	VeganFileRepository vfr;
+
 
 
 	@GetMapping("/vegan/create")
@@ -36,11 +45,45 @@ public class VeganController {
 	}
 
 	@PostMapping("/vegan/create")
-	public String veganCreatePost(@ModelAttribute Vegan vegan, HttpSession session) {
+	public String veganCreatePost(@ModelAttribute Vegan vegan, HttpSession session, MultipartHttpServletRequest mRequest) {
 		User user = (User) session.getAttribute("user");
 		vegan.setUser(user);
 		vegan.setCreateDate(new Date());
 		veganRepository.save(vegan);
+
+		Iterator<String> iter = mRequest.getFileNames();
+		while (iter.hasNext()) {
+			String inputName = iter.next();
+			List<MultipartFile> mFiles = mRequest.getFiles(inputName);
+			for(MultipartFile mFile : mFiles) {
+				String oName = mFile.getOriginalFilename();
+				if(oName == null || oName.equals("")){
+					break;
+				}
+
+				File f = new File("c:/project"+oName);
+				String nName = "";
+				if(f.isFile()){
+					String fileName = oName.substring(0, oName.lastIndexOf("."));
+					String fileExt = oName.substring(oName.lastIndexOf("."));
+					nName = fileName + System.currentTimeMillis() +fileExt;
+				} else {
+					nName = oName;
+				}
+
+				try {
+					VeganFile vf = new VeganFile();
+					vf.setOriginalFileName(oName);
+					vf.setSaveFileName(nName);
+					vf.setVegan(vegan);
+					vfr.save(vf);
+
+
+				
+				}
+			}
+		}
+		
 
 		return "redirect:/vegan/list";
 	}
@@ -73,6 +116,27 @@ public class VeganController {
 	return "redirect:/vegan/list";
 
 	}
+
+    
+    @GetMapping("vegan/update")
+	public String veganUpdate(Long vId, Model model) {
+
+		Optional<Vegan> opt =veganService.update(vId);
+		model.addAttribute("vegan", opt.get());
+
+
+       return "vegan_update";
+	}
+
+
+	@PostMapping("vegan/update")
+	public String veganUpdatePost(@ModelAttribute Vegan vegan, Long vId) {
+		veganService.updatePost(vId, vegan);
+
+		return "redirect:/vegan/detail?vId="+vId;
+	}
+
+	
 
 
 }

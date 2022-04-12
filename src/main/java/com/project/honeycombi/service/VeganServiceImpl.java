@@ -36,6 +36,25 @@ public class VeganServiceImpl implements VeganService {
         veganRepository.deleteById(vId);
     }
 
+    
+
+    @Override
+    public Optional<Vegan> update(Long vId) {
+        Optional<Vegan> opt = veganRepository.findById(vId);
+        
+        return opt;
+    }
+
+    @Override
+    public void updatePost(Long vId, Vegan vegan) {
+        Optional<Vegan> opt = veganRepository.findById(vId);
+        Vegan dbVegan = opt.get();
+        dbVegan.setVSubject(vegan.getVSubject());
+		dbVegan.setVContent(vegan.getVContent());
+		veganRepository.save(dbVegan);
+        
+    }
+
   
 
     

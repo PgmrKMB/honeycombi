@@ -10,12 +10,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <a class="navbar-brand" th:href="@{/}">게시판</a>
-    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item ">
@@ -27,7 +22,6 @@
     </div>
   </nav>
   <div class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
     <form method="post" class="post-form my-3" 
           enctype="multipart/form-data">
       <div class="form-group">
@@ -44,7 +38,7 @@
           id="file" type="file"
           accept="image/jpeg, image/png, image/*">
       </div>
-      <button type="submit" class="btn btn-primary">저장하기</button>
+      <button type="submit" class="btn btn-primary">글 저장하기</button>
     </form>
   </div>
 

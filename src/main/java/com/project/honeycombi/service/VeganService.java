@@ -15,6 +15,12 @@ public interface VeganService {
 
     void delete(Long vId);
 
+    Optional<Vegan> update(Long vId);
+
+    void updatePost(Long vId, Vegan vegan);
+
+
+
     
     
 }
