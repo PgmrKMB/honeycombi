@@ -34,7 +34,7 @@ public class ManiaServiceImpl implements ManiaService {
 
   @Override
   public List<Mania> maniaList(int page) {
-    Page<Mania> p = maniaRepository.findAll(PageRequest.of(page - 1, 10, Sort.Direction.DESC, "createDate"));
+    Page<Mania> p = maniaRepository.findAll(PageRequest.of(page - 1, 5, Sort.Direction.DESC, "createDate"));
 
     List<Mania> list = p.getContent();
 
@@ -129,6 +129,13 @@ public class ManiaServiceImpl implements ManiaService {
       
       maniaRepository.save(dbmania);
     }
+
+  }
+
+  @Override
+  public void count(Long mId) {
+    
+    maniaRepository.count(mId);
 
   }
 

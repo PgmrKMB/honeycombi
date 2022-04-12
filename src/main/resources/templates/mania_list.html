@@ -11,7 +11,12 @@
 </head>
 
 <body>
-    <table border="1">
+
+    <h2><a style="text-decoration: none;" th:if="${session.user != null}" th:href="@{/signout}"
+            th:text="${session.user.nickname} + ' (로그아웃)'"></a></h2>
+    <h2><a style="text-decoration: none;" th:unless="${session.user != null}" th:href="@{/}" th:text="로그인"></a></h2>
+
+    <table class="table-bordered">
         <tr>
             <th>글번호</th>
             <th>제목</th>
@@ -25,13 +30,42 @@
             <td><a th:href="@{/mania/detail(mId=${mania.mId})}" th:text="${mania.mTitle}"></a></td>
             <td th:text="${mania.user.nickname}"></td>
             <td th:text="${mania.createDate}"></td>
-            <td>test</td>
-            <td>test</td>
+            <td th:text="${mania.mCount}"></td>
+            <td th:text="${mania.mRecommend}"></td>
         </tr>
     </table>
     <br>
     <hr><br>
     <a th:href="@{/mania/write}"><button type="button" class="btn btn-outline-primary">글 쓰 기</button></a>
+
+    <br><br>
+
+
+    <script>
+        let query = location.search;
+        let page = query.substring(query.indexOf('=') + 1);
+        let startPage = parseInt(page / 5) * 5 + 1;
+        let endPage = parseInt(startPage + 4);
+
+        let html = '<ul class="pagination">';
+        html += `<li class="page-item"><a class="page-link" href="/mania?page=${startPage - 5}">Previous</a></li>`;
+
+        for (let i = startPage; i <= endPage; i++) {
+            //backtick
+            html +=
+                `<li class="page-item ${page == i ? 'active' : ''}">
+            <a class="page-link" href="mania?page=${i}">${i}</a>
+           </li>`;
+        }
+
+        html += `<li class="page-item"><a class="page-link" href="/mania?page=${endPage + 1}">Next</a></li>`;
+        html += '</ul>';
+        document.body.innerHTML += html;
+    </script>
+
+
+
+
 </body>
 
 </html>

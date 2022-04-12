@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -20,6 +21,7 @@ public class ManiaFile {
     String saveFileName;
 
     @ManyToOne
+    @ToString.Exclude
     Mania mania;
 
 }
