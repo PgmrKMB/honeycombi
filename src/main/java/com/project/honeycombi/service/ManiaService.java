@@ -20,4 +20,10 @@ public interface ManiaService {
 
     List<ManiaFile> download(Mania mania);
 
+    void delete(Long mId);
+
+    Optional<Mania> update(Long mId);
+
+    void updatePost(Long mId, Mania mania);
+
 }
