@@ -27,5 +27,11 @@ public class UserServiceImpl implements UserService {
        
         return opt;
     }
+
+    @Override
+    public User usercheck(String email) {
+      User user = userRepository.findByEmail(email);
+        return user;
+    }
     
 }

@@ -18,7 +18,7 @@
 
     <h2><a style="text-decoration: none;" th:if="${session.user != null}" th:href="@{/signout}"
             th:text="${session.user.nickname} + ' (로그아웃)'"></a></h2>
-    <h2><a style="text-decoration: none;" th:unless="${session.user != null}" th:href="@{/}" th:text="로그인"></a></h2>
+    <h2><a style="text-decoration: none;" th:unless="${session.user != null}" th:href="@{/sign}" th:text="로그인"></a></h2>
 
     <div class="container mt-3">
         <div class="dropdown">

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 
 @Controller
@@ -20,7 +23,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/sign")
     public String signForm() {
         return "sign";
     }
@@ -30,7 +33,7 @@ public class UserController {
 
         userService.signup(user);
 
-        return "redirect:/";
+        return "redirect:/sign";
     }
 
     @PostMapping(value = "/signin")
@@ -50,5 +53,14 @@ public class UserController {
         session.invalidate();
         return "redirect:/main";
     }
+
+    @GetMapping(value="/user/check")
+    @ResponseBody
+    public User userCheck(String email) {
+        User user = userService.usercheck(email);
+        return user;
+    }
+    
+
 
 }
