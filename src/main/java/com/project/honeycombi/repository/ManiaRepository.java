@@ -11,7 +11,7 @@ public interface ManiaRepository extends JpaRepository<Mania, Long> {
 
     @Query(
         nativeQuery = true,
-        value = " update mania " +
+        value = " update honeycombi.mania " +
                 " set `m_count` = `m_count` + 1 " +
                 " where m_id = ?1 ")
     void count(Long mId);
