@@ -14,7 +14,7 @@
                 <li class="nav-item ">
                     <a th:if="${session.user != null}" class="nav-link" th:href="@{/signout}"
                         th:text="${session.user.nickname} + ' (로그아웃)'"></a>
-                    <a th:unless="${session.user != null}" class="nav-link" th:href="@{/signin}" th:text="로그인"></a>
+                    <a th:unless="${session.user != null}" class="nav-link" th:href="@{/}" th:text="로그인"></a>
                 </li>
             </ul>
         </div>
@@ -30,10 +30,10 @@
 
             <tr th:each="vegan : ${list}" style="text-align: center;">
                 <td th:text="${vegan.vId}"></td>
-                <td th:text="${vegan.vSubject}"></td>
+                <td><a th:href="@{/vegan/detail(vId=${vegan.vId})}" th:text="${vegan.vSubject}"></a></td>
+                <!-- <td><a href="vegan_vContent?vId=${vegan.vId}">${vegan.vSubject}</a></td> -->
                 <td th:text="${vegan.user.nickname}"></td>
                 <td th:text="${vegan.createDate}"></td>
-                <!-- <td><a href="vegan_vContent?vId=${vegan.vId}"></a></td> -->
 
                 <!-- <td th:text="${vegan.user.nickname}"></td> -->
             </tr>

@@ -31,5 +31,13 @@ public class VeganServiceImpl implements VeganService {
         return list;
     }
 
+    @Override
+    public String deleteById(Long vId) {
+        veganRepository.deleteById(vId);
+        return null;
+    }
+
+  
+
     
 }

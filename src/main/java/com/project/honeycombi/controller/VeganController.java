@@ -31,20 +31,21 @@ public class VeganController {
 	@Autowired
 	VeganService veganService;
 
+
+
 	@GetMapping("/vegan/create")
 	public String VeganCreate() {
 		return "vegan_create";
 	}
 
 	@PostMapping("/vegan/create")
-	public String veganCreatePost(@ModelAttribute Vegan vegan,
-			HttpSession session) {
+	public String veganCreatePost(@ModelAttribute Vegan vegan, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		vegan.setUser(user);
 		vegan.setCreateDate(new Date());
 		veganRepository.save(vegan);
 
-		return "redirect:/vegan/create";
+		return "redirect:/vegan/list";
 	}
 
 	@GetMapping("/vegan/list")
@@ -65,6 +66,14 @@ public class VeganController {
 		model.addAttribute("vegan", opt.get());
 
 		return "vegan_detail";
+
+	}
+
+	@GetMapping("vegan/delete")
+	public String veganDelete(Long vId) {
+	veganService.deleteById(vId);
+
+	return "redirect:/vegan/list";
 
 	}
 }

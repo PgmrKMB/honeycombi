@@ -12,5 +12,9 @@ public interface VeganService {
     Optional<Vegan> detail(Long vId);
 
     List<Vegan> list(int page);
+
+    String deleteById(Long vId);
+
+    
     
 }
