@@ -14,7 +14,7 @@ public class ManiaFile {
     
     @Id
     @GeneratedValue
-    Long mfID;
+    Long mfId;
 
     String originalFileName;
 
