@@ -1,9 +1,6 @@
 package com.project.honeycombi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,9 +68,11 @@ public class VeganController {
 
 	@GetMapping("vegan/delete")
 	public String veganDelete(Long vId) {
-	veganService.deleteById(vId);
+	veganService.delete(vId);
 
 	return "redirect:/vegan/list";
 
 	}
+
+
 }

@@ -13,7 +13,7 @@ public interface VeganService {
 
     List<Vegan> list(int page);
 
-    String deleteById(Long vId);
+    void delete(Long vId);
 
     
     
