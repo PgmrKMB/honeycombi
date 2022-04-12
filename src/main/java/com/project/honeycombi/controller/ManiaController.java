@@ -49,13 +49,13 @@ public class ManiaController {
 
         System.out.println(list.toString());
 
-        return "mania_list";
+        return "/mania/mania_list";
     }
 
     @GetMapping(value = "/mania/write")
     public String maniaWriteForm() {
 
-        return "mania_write";
+        return "/mania/mania_write";
     }
 
     @PostMapping(value = "/mania/write")
@@ -78,7 +78,7 @@ public class ManiaController {
 
         model.addAttribute("mania", opt.get());
 
-        return "mania_detail";
+        return "/mania/mania_detail";
     }
 
     @GetMapping(value = "/download")
@@ -115,7 +115,7 @@ public class ManiaController {
             model.addAttribute("err", "잘못된 요청입니다.");
         }
 
-        return "mania_update";
+        return "/mania/mania_update";
     }
 
     @PostMapping(value = "/mania/update")
