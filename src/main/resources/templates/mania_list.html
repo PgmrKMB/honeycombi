@@ -16,7 +16,7 @@
             th:text="${session.user.nickname} + ' (로그아웃)'"></a></h2>
     <h2><a style="text-decoration: none;" th:unless="${session.user != null}" th:href="@{/}" th:text="로그인"></a></h2>
 
-    <table border="1">
+    <table class="table-bordered">
         <tr>
             <th>글번호</th>
             <th>제목</th>
@@ -31,7 +31,7 @@
             <td th:text="${mania.user.nickname}"></td>
             <td th:text="${mania.createDate}"></td>
             <td th:text="${mania.mCount}"></td>
-            <td>test</td>
+            <td th:text="${mania.mRecommend}"></td>
         </tr>
     </table>
     <br>
