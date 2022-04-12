@@ -26,31 +26,31 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Service
 public class ManiaServiceImpl implements ManiaService {
 
-    @Autowired
-    ManiaRepository maniaRepository;
+  @Autowired
+  ManiaRepository maniaRepository;
 
-    @Autowired
-    ManiaFileRepository maniaFileRepository;
+  @Autowired
+  ManiaFileRepository maniaFileRepository;
 
-    @Override
-    public List<Mania> maniaList(int page) {
-        Page<Mania> p = maniaRepository.findAll(PageRequest.of(page - 1, 10, Sort.Direction.DESC, "createDate"));
+  @Override
+  public List<Mania> maniaList(int page) {
+    Page<Mania> p = maniaRepository.findAll(PageRequest.of(page - 1, 10, Sort.Direction.DESC, "createDate"));
 
-        List<Mania> list = p.getContent();
+    List<Mania> list = p.getContent();
 
-        return list;
+    return list;
 
-    }
+  }
 
-    @Override
-    public void ManiaWrite(Mania mania, HttpSession session, MultipartHttpServletRequest mRequest) {
+  @Override
+  public void ManiaWrite(Mania mania, HttpSession session, MultipartHttpServletRequest mRequest) {
 
-        User user = (User) session.getAttribute("user");
-        mania.setUser(user);
-        mania.setCreateDate(new Date());
-        maniaRepository.save(mania);
+    User user = (User) session.getAttribute("user");
+    mania.setUser(user);
+    mania.setCreateDate(new Date());
+    maniaRepository.save(mania);
 
-        /* 첨부파일 저장 및 DB 저장 */
+    /* 첨부파일 저장 및 DB 저장 */
     Iterator<String> iter = mRequest.getFileNames();
     while (iter.hasNext()) {
       String inputName = iter.next();
@@ -89,21 +89,47 @@ public class ManiaServiceImpl implements ManiaService {
       }
     }
 
-    }
+  }
 
-    @Override
-    public Optional<Mania> maniaDetail(Long mId) {
+  @Override
+  public Optional<Mania> maniaDetail(Long mId) {
 
-        Optional<Mania> opt = maniaRepository.findById(mId);
+    Optional<Mania> opt = maniaRepository.findById(mId);
 
-        return opt;
-    }
+    return opt;
+  }
 
-    @Override
-    public List<ManiaFile> download(Mania mania) {
+  @Override
+  public List<ManiaFile> download(Mania mania) {
+
+    List<ManiaFile> fList = maniaFileRepository.findByMania(mania);
+    return fList;
+  }
+
+  @Override
+  public void delete(Long mId) {
+    maniaRepository.deleteById(mId);
+  }
+
+  @Override
+  public Optional<Mania> update(Long mId) {
+    Optional<Mania> opt = maniaRepository.findById(mId);
+    
+    return opt;
+  }
+
+  @Override
+  public void updatePost(Long mId, Mania mania) {
+    Optional<Mania> opt = maniaRepository.findById(mId);
+
+    if(opt.isPresent()){
+      Mania dbmania = opt.get();
+      dbmania.setMTitle(mania.getMTitle());
+      dbmania.setMContent(mania.getMContent());
       
-     List<ManiaFile> fList = maniaFileRepository.findByMania(mania);
-      return fList;
+      maniaRepository.save(dbmania);
     }
+
+  }
 
 }

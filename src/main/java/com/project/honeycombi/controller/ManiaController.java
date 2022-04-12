@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ManiaController {
@@ -54,13 +55,11 @@ public class ManiaController {
 
     @PostMapping(value = "/mania/write")
     public String maniaWritePost(
-        @ModelAttribute Mania mania,
-        HttpSession session,
-        MultipartHttpServletRequest mRequest
-        ) {
+            @ModelAttribute Mania mania,
+            HttpSession session,
+            MultipartHttpServletRequest mRequest) {
 
         maniaService.ManiaWrite(mania, session, mRequest);
-
 
         return "redirect:/mania";
     }
@@ -70,16 +69,13 @@ public class ManiaController {
 
         Optional<Mania> opt = maniaService.maniaDetail(mId);
 
-        
-
         model.addAttribute("mania", opt.get());
 
         return "mania_detail";
     }
 
-
-    @GetMapping("/download")
-    public ResponseEntity<Resource> download(@ModelAttribute Mania mania) throws Exception{
+    @GetMapping(value = "/download")
+    public ResponseEntity<Resource> download(@ModelAttribute Mania mania) throws Exception {
 
         List<ManiaFile> fList = maniaService.download(mania);
 
@@ -88,15 +84,38 @@ public class ManiaController {
 
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
-
         return ResponseEntity.ok()
-     .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
-     .contentLength(file.length())
-     .contentType(
-         MediaType.parseMediaType("application/octet-stream"))
-     .body(resource);
+                .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
+                .contentLength(file.length())
+                .contentType(
+                        MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
     }
 
-    
+    @GetMapping(value = "/mania/delete")
+    public String maniaDelete(@RequestParam Long mId) {
+        maniaService.delete(mId);
+        return "redirect:/mania";
+    }
+
+    @GetMapping(value = "/mania/update")
+    public String maniaUpdate(@RequestParam Long mId, Model model) {
+        Optional<Mania> opt = maniaService.update(mId);
+
+        if (opt.isPresent()) {
+            model.addAttribute("mania", opt.get());
+        } else {
+            model.addAttribute("err", "잘못된 요청입니다.");
+        }
+
+        return "mania_update";
+    }
+
+    @PostMapping(value = "/mania/update")
+    public String maniaUpdatePost(@ModelAttribute Mania mania, Long mId) {
+        maniaService.updatePost(mId, mania);
+
+        return "redirect:/mania/detail?mId=" + mId;
+    }
 
 }

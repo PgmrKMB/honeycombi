@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>매니아 게시판</title>
+    <title>매니아 게시판</title> 
 </head>
 
 <body>
@@ -15,12 +15,14 @@
         <div>작성일 : [[${mania.createDate}]]</div>
     </div>
     <div>
-        <img th:src="@{/download(id=${param.id})}" style="width:15%;" onerror="this.src='/noimage.png'">
+        <img th:src="@{/download(mId=${param.mId})}" style="width:15%;" onerror="this.src='/noimage.png'">
     </div>
+
+   
 
     <div th:if="${session.user.nickname} == ${mania.user.nickname}">
         <a th:href="@{/mania/update(mId=${param.mId})}">수정</a>
-        <a th:href="@{/question/delete(mId=${param.mId})}">삭제</a>
+        <a th:href="@{/mania/delete(mId=${param.mId})}">삭제</a>
     </div>
 
 

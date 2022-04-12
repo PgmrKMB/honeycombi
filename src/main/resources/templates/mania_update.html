@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매니아 게시판</title>
+</head>
+
+<body>
+
+    <form action="/mania/update" method="post" enctype="multipart/form-data">
+        <input type="text" name="mTitle" th:value="${mania.mTitle}">
+        <input type="text" name="mContent" th:value="${mania.mContent}">
+        <input type="file" name="file" accept="image/jpeg, image/png, image/*">
+        <button type="submit">수정하기</button>
+    </form>
+
+</body>
+
+</html>
