@@ -39,6 +39,12 @@ public class ManiaController {
     public String mania(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
         List<Mania> list = maniaService.maniaList(page);
+        
+        int startPage = (page - 1) / 10 * 10 + 1;
+		int endPage = startPage + 9;
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("page", page);
 
         model.addAttribute("list", list);
 
@@ -68,6 +74,8 @@ public class ManiaController {
     public String maniaDetail(Model model, Long mId) {
 
         Optional<Mania> opt = maniaService.maniaDetail(mId);
+
+        maniaService.count(mId);
 
         model.addAttribute("mania", opt.get());
 

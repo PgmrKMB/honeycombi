@@ -26,4 +26,6 @@ public interface ManiaService {
 
     void updatePost(Long mId, Mania mania);
 
+    void count(Long mId);
+
 }

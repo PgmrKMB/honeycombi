@@ -13,7 +13,7 @@
         <input type="text" name="mTitle" placeholder="글제목">
         <input type="text" name="mContent" placeholder="글내용">
         <input type="file" name="file" accept="image/jpeg, image/png, image/*">
-        <button type="submit">글 쓰 기</button>
+        <button type="submit" th:if="${session.user != null}">글 쓰 기</button>
     </form>
 
 </body>
