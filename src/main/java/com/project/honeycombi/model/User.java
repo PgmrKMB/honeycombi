@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,9 +26,11 @@ public class User {
     String nickname;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     List<Mania> manias = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     List<Vegan> vegans = new ArrayList<>();
  
 }
