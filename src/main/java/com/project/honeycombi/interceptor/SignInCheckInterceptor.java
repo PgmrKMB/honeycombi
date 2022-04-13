@@ -6,8 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.User;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+
+@Component
 public class SignInCheckInterceptor implements HandlerInterceptor {
 
     @Override
@@ -19,7 +22,7 @@ public class SignInCheckInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
-            response.sendRedirect("/");
+            response.sendRedirect("/sign");
             return false;
         }
         return true;

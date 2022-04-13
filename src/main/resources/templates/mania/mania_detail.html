@@ -20,7 +20,8 @@
 
    
 
-    <div th:if="${session.user.nickname} == ${mania.user.nickname}">
+    <div th:if="${session.user} != null">
+        <div th:if="${session.user.nickname} == ${mania.user.nickname}"></div>
         <a th:href="@{/mania/update(mId=${param.mId})}">수정</a>
         <a th:href="@{/mania/delete(mId=${param.mId})}">삭제</a>
     </div>
