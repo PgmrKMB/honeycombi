@@ -28,6 +28,8 @@ public class Vegan {
 	String vSubject;
 	String vContent;
 
+	Integer vHit = 0;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	Date createDate;
 	

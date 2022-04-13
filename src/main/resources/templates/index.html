@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 30%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  </style>
+<head th:replace="common/head"></head>
+<body>
+
+<nav th:replace="common/navbar"></nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="images/minchodan.jpg" alt="Image"  >
+        <div class="carousel-caption">
+          <h3>민초단 VS 반민초단</h3>
+          <p>누가 민초를 치약맛이라 했나~ vs 치약을 왜 먹어?</p>
+        </div>      
+      </div>
+
+      <div class="item">
+        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+        <div class="carousel-caption">
+          <h3>More Sell $</h3>
+          <p>Lorem ipsum...</p>
+        </div>      
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+  
+<div class="container text-center">    
+  <h3>WEEKLY BEST CHOICE</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="images/icecream.jpg" width="1200" height="600" class="img-responsive" alt="Image">
+      <p style="font-size: 20px; font-weight: bold;">홈런볼+빵빠레</p>
+    </div>
+    <div class="col-sm-4"> 
+      <img src="images/sub.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>서브웨이 꿀조합</p>    
+    </div>
+    <div class="col-sm-4"> 
+      <img src="images/ramyeon.png" class="img-responsive" style="width:100%" alt="Image">
+      <p>라면 꿀조합</p>    
+    </div>
+    <div class="col-sm-4">
+      <div class="well">
+       <p>민초단, 집합!!!</p>
+      </div>
+      <div class="well">
+       <p>비건부추만두 레시피 공개</p>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<footer th:replace="common/footer"></footer>
+
+</body>
+</html>

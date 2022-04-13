@@ -109,10 +109,12 @@ public class VeganController {
 		return "/vegan/vegan_list";
 	}
 
-	@GetMapping("vegan/detail")
+	@GetMapping("/vegan/detail")
 	public String veganDetail(Long vId, Model model) {
 
 		Optional<Vegan> opt = veganService.detail(vId);
+		
+		veganService.hit(vId);
 
 		model.addAttribute("vegan", opt.get());
 
@@ -120,7 +122,7 @@ public class VeganController {
 
 	}
 
-	@GetMapping("vegan/delete")
+	@GetMapping("/vegan/delete")
 	public String veganDelete(Long vId) {
 		veganService.delete(vId);
 
@@ -128,7 +130,7 @@ public class VeganController {
 
 	}
 
-	@GetMapping("vegan/update")
+	@GetMapping("/vegan/update")
 	public String veganUpdate(Long vId, Model model) {
 
 		Optional<Vegan> opt = veganService.update(vId);
@@ -137,7 +139,7 @@ public class VeganController {
 		return "/vegan/vegan_update";
 	}
 
-	@PostMapping("vegan/update")
+	@PostMapping("/vegan/update")
 	public String veganUpdatePost(@ModelAttribute Vegan vegan, Long vId) {
 		veganService.updatePost(vId, vegan);
 

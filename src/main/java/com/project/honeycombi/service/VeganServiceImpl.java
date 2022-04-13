@@ -26,7 +26,7 @@ public class VeganServiceImpl implements VeganService {
 
     @Override
     public List<Vegan> list(int page) {
-        Page<Vegan> p = veganRepository.findAll(PageRequest.of(page -1, 10, Sort.Direction.DESC, "createDate"));
+        Page<Vegan> p = veganRepository.findAll(PageRequest.of(page -1, 5, Sort.Direction.DESC, "createDate"));
         List<Vegan> list = p.getContent();
         return list;
     }
@@ -52,6 +52,12 @@ public class VeganServiceImpl implements VeganService {
         dbVegan.setVSubject(vegan.getVSubject());
 		dbVegan.setVContent(vegan.getVContent());
 		veganRepository.save(dbVegan);
+        
+    }
+
+    @Override
+    public void hit(Long vId) {
+         veganRepository.count(vId);
         
     }
 
