@@ -1,6 +1,10 @@
 package com.project.honeycombi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -36,7 +43,7 @@ public class VeganController {
 	VeganService veganService;
 
 	@Autowired
-	VeganFileRepository vfr;
+	VeganFileRepository veganFileRepository;
 
 	@GetMapping("/vegan/create")
 	public String VeganCreate() {
@@ -77,7 +84,7 @@ public class VeganController {
 					vf.setOriginalFileName(oName);
 					vf.setSaveFileName(nName);
 					vf.setVegan(vegan);
-					vfr.save(vf);
+					veganFileRepository.save(vf);
 
 					mFile.transferTo(new File("c:/project/" + oName));
 				} catch (IllegalStateException e) {
@@ -135,6 +142,23 @@ public class VeganController {
 		veganService.updatePost(vId, vegan);
 
 		return "redirect:/vegan/detail?vId=" + vId;
+	}
+
+	@GetMapping("/vegandownload")
+	public ResponseEntity<Resource> download (@ModelAttribute Vegan vegan) throws Exception {
+		List<VeganFile> vList = veganFileRepository.findByVegan(vegan);
+		
+		String fileName = vList.get(0).getSaveFileName();
+		File file = new File("c:/project/" + fileName);
+
+		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+		return ResponseEntity.ok()
+		       .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
+			   .contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream"))
+			   .body(resource);
+
+
 	}
 
 }

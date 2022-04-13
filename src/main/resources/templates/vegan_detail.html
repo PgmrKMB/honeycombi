@@ -14,6 +14,10 @@
         <div th:text="${vegan.user.nickname}"></div>
     </div>
 
+    <img th:src="@{/vegandownload(vId=${param.vId})}" style="width:50px;" onerror="this.src='/noimage.png'">
+
+
+
     <th:block th:if="${session.user.nickname!=null}">
         <div th:if="${session.user.nickname} == ${vegan.user.nickname}">
             <a th:href="@{/vegan/update(vId=${vegan.vId})}">수정하기</a>
