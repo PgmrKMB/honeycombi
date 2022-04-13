@@ -55,6 +55,12 @@ public class VeganServiceImpl implements VeganService {
         
     }
 
+    @Override
+    public void hit(Long vId) {
+         veganRepository.count(vId);
+        
+    }
+
   
 
     

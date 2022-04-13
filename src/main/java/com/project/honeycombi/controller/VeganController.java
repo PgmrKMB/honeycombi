@@ -99,7 +99,7 @@ public class VeganController {
 		return "redirect:/vegan/list";
 	}
 
-	@GetMapping("/vegan/list")
+	@GetMapping("vegan/list")
 	public String vegan(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
 		List<Vegan> list = veganService.list(page);
@@ -113,6 +113,8 @@ public class VeganController {
 	public String veganDetail(Long vId, Model model) {
 
 		Optional<Vegan> opt = veganService.detail(vId);
+		
+		veganService.hit(vId);
 
 		model.addAttribute("vegan", opt.get());
 
