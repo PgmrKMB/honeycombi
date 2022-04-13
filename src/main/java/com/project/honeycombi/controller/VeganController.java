@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -37,15 +38,15 @@ public class VeganController {
 	@Autowired
 	VeganFileRepository vfr;
 
-
-
 	@GetMapping("/vegan/create")
 	public String VeganCreate() {
 		return "vegan_create";
 	}
 
 	@PostMapping("/vegan/create")
-	public String veganCreatePost(@ModelAttribute Vegan vegan, HttpSession session, MultipartHttpServletRequest mRequest) {
+	public String veganCreatePost(@ModelAttribute Vegan vegan, HttpSession session,
+			MultipartHttpServletRequest mRequest) {
+				
 		User user = (User) session.getAttribute("user");
 		vegan.setUser(user);
 		vegan.setCreateDate(new Date());
@@ -55,18 +56,18 @@ public class VeganController {
 		while (iter.hasNext()) {
 			String inputName = iter.next();
 			List<MultipartFile> mFiles = mRequest.getFiles(inputName);
-			for(MultipartFile mFile : mFiles) {
+			for (MultipartFile mFile : mFiles) {
 				String oName = mFile.getOriginalFilename();
-				if(oName == null || oName.equals("")){
+				if (oName == null || oName.equals("")) {
 					break;
 				}
 
-				File f = new File("c:/project"+oName);
+				File f = new File("c:/project" + oName);
 				String nName = "";
-				if(f.isFile()){
+				if (f.isFile()) {
 					String fileName = oName.substring(0, oName.lastIndexOf("."));
 					String fileExt = oName.substring(oName.lastIndexOf("."));
-					nName = fileName + System.currentTimeMillis() +fileExt;
+					nName = fileName + System.currentTimeMillis() + fileExt;
 				} else {
 					nName = oName;
 				}
@@ -78,12 +79,15 @@ public class VeganController {
 					vf.setVegan(vegan);
 					vfr.save(vf);
 
-
-				
+					mFile.transferTo(new File("c:/project/" + oName));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+
 			}
 		}
-		
 
 		return "redirect:/vegan/list";
 	}
@@ -111,32 +115,26 @@ public class VeganController {
 
 	@GetMapping("vegan/delete")
 	public String veganDelete(Long vId) {
-	veganService.delete(vId);
+		veganService.delete(vId);
 
-	return "redirect:/vegan/list";
+		return "redirect:/vegan/list";
 
 	}
 
-    
-    @GetMapping("vegan/update")
+	@GetMapping("vegan/update")
 	public String veganUpdate(Long vId, Model model) {
 
-		Optional<Vegan> opt =veganService.update(vId);
+		Optional<Vegan> opt = veganService.update(vId);
 		model.addAttribute("vegan", opt.get());
 
-
-       return "vegan_update";
+		return "vegan_update";
 	}
-
 
 	@PostMapping("vegan/update")
 	public String veganUpdatePost(@ModelAttribute Vegan vegan, Long vId) {
 		veganService.updatePost(vId, vegan);
 
-		return "redirect:/vegan/detail?vId="+vId;
+		return "redirect:/vegan/detail?vId=" + vId;
 	}
-
-	
-
 
 }
