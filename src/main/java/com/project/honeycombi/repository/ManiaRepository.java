@@ -1,5 +1,8 @@
 package com.project.honeycombi.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.project.honeycombi.model.Mania;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +18,7 @@ public interface ManiaRepository extends JpaRepository<Mania, Long> {
                 " set `m_count` = `m_count` + 1 " +
                 " where m_id = ?1 ")
     void count(Long mId);
+
+    List<Mania> findByUser_uId(Long uId);
     
 }
