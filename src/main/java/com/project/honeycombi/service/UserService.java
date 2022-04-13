@@ -9,5 +9,7 @@ public interface UserService {
     public void signup(User user);
 
     public Optional<User> signin(User user);
+
+    public User usercheck(String email);
     
 }
