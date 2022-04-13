@@ -72,7 +72,7 @@ public class ManiaController {
         return "/mania/mania_detail";
     }
 
-    @GetMapping(value = "/download")
+    @GetMapping(value = "/maniadownload")
     public ResponseEntity<Resource> download(@ModelAttribute Mania mania) throws Exception {
 
         List<ManiaFile> fList = maniaService.download(mania);

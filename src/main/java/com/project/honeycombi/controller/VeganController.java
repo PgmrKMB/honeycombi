@@ -47,7 +47,7 @@ public class VeganController {
 
 	@GetMapping("/vegan/create")
 	public String VeganCreate() {
-		return "vegan_create";
+		return "/vegan/vegan_create";
 	}
 
 	@PostMapping("/vegan/create")
@@ -106,7 +106,7 @@ public class VeganController {
 
 		model.addAttribute("list", list);
 
-		return "vegan_list";
+		return "/vegan/vegan_list";
 	}
 
 	@GetMapping("vegan/detail")
@@ -116,7 +116,7 @@ public class VeganController {
 
 		model.addAttribute("vegan", opt.get());
 
-		return "vegan_detail";
+		return "/vegan/vegan_detail";
 
 	}
 
@@ -134,7 +134,7 @@ public class VeganController {
 		Optional<Vegan> opt = veganService.update(vId);
 		model.addAttribute("vegan", opt.get());
 
-		return "vegan_update";
+		return "/vegan/vegan_update";
 	}
 
 	@PostMapping("vegan/update")
