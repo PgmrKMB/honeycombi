@@ -19,6 +19,8 @@ public interface VeganService {
 
     void updatePost(Long vId, Vegan vegan);
 
+    void hit(Long vId);
+
 
 
     
