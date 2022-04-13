@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -36,8 +37,6 @@ public class Mania {
 
     Integer mCount = 0;
     
-    Integer mRecommend = 0;
-
     @OneToMany(mappedBy = "mania", cascade = CascadeType.REMOVE)
     List<ManiaFile> maniaFiles = new ArrayList<>();
 

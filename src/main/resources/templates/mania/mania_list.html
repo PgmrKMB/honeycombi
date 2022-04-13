@@ -23,7 +23,6 @@
             <th>글쓴이</th>
             <th>작성일</th>
             <th>조회</th>
-            <th>추천</th>
         </tr>
         <tr th:each="mania : ${list}">
             <td th:text="${mania.mId}"></td>
@@ -31,7 +30,6 @@
             <td th:text="${mania.user.nickname}"></td>
             <td th:text="${mania.createDate}"></td>
             <td th:text="${mania.mCount}"></td>
-            <td th:text="${mania.mRecommend}"></td>
         </tr>
     </table>
     <br>
