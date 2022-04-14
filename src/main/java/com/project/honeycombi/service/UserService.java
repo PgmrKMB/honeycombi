@@ -15,5 +15,7 @@ public interface UserService {
     public User usercheck(String email);
 
     public List<Mania> myWriting(User user);
+
+    public void deleteAcc(User user);
     
 }
