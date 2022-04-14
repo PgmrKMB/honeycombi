@@ -15,7 +15,7 @@ public interface VeganRepository extends JpaRepository<Vegan, Long>{
                 " set `v_hit` = `v_hit` + 1 " +
                 " where v_id = ?1")
                 
-    void count(Long vId); 
+    void count(Long vId);
 
 
 }

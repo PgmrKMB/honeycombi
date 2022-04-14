@@ -2,9 +2,6 @@ package com.project.honeycombi.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
@@ -103,7 +100,7 @@ public class ManiaController {
         if (opt.isPresent()) {
             model.addAttribute("mania", opt.get());
         } else {
-            model.addAttribute("err", "잘못된 요청입니다.");
+            model.addAttribute("mupdate_r", "fail");
         }
 
         return "/mania/mania_update";
@@ -114,6 +111,13 @@ public class ManiaController {
         maniaService.updatePost(mId, mania);
 
         return "redirect:/mania/detail?mId=" + mId;
+    }
+
+    @PostMapping(value = "/mania/recommend")
+    public void mrcmd(Long mId, Long uId){
+        
+        maniaService.mrcmd(mId,uId);
+       
     }
 
 }

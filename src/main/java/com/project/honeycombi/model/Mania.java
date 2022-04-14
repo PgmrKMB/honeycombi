@@ -2,20 +2,17 @@ package com.project.honeycombi.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.hibernate.annotations.ColumnDefault;
 
 import lombok.Data;
 import lombok.ToString;
@@ -44,5 +41,8 @@ public class Mania {
 
     @OneToMany(mappedBy = "mania")
     List<ManiaRecommend> maniaRecommends = new ArrayList<>();
+
+    @OneToMany(mappedBy = "mania")
+    Set<ManiaRecommend> mrcmds = new HashSet<>();
 
 }

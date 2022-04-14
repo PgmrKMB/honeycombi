@@ -15,10 +15,15 @@
         <div>작성일 : [[${mania.createDate}]]</div>
     </div>
     <div>
-        <img th:src="@{/maniadownload(mId=${param.mId})}" style="width:50px;" onerror="this.src='/noimage.png'">
+        <img th:src="@{/maniadownload(mId=${param.mId})}" style="width:150px;" onerror="this.src='/images/noimg.png'">
     </div>
 
-
+    <div>
+        <button id="clickme">
+            좋아요~
+        </button>
+        <img src="/images/heart.png" style="width:30px; height: 30px;" id="heart">
+    </div>
 
     <div th:if="${session.user} != null">
         <div th:if="${session.user.nickname} == ${mania.user.nickname}"></div>
@@ -30,6 +35,44 @@
 
 
     <div id="disqus_thread"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        $("#clickme").click(function changeImg() {
+            var img1 = document.getElementById('heart');
+
+            if (img1.src.indexOf('_b') == -1) {
+                img1.src = img1.src.replace('.png', '_b.png');
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '/mania/recommend',
+                    data: {
+                        mId : "[[${mania.mId}]]",
+                        uId : "[[${session.user.uId}]]"
+                    },
+                    success: function () {
+                        alert("좋아요~")
+                    },
+                    error: function () {
+                        alert("좋아요 안됌 ㅠㅠ")
+                    }
+                });
+
+            } else {
+                img1.src = img1.src.replace('_b.png', '.png');
+
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
     <script>
         /**
         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -52,5 +95,7 @@
 
 
 </body>
+
+
 
 </html>

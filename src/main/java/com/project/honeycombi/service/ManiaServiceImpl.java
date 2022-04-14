@@ -13,6 +13,7 @@ import com.project.honeycombi.model.Mania;
 import com.project.honeycombi.model.ManiaFile;
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.repository.ManiaFileRepository;
+import com.project.honeycombi.repository.ManiaRecommendRepository;
 import com.project.honeycombi.repository.ManiaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class ManiaServiceImpl implements ManiaService {
 
   @Autowired
   ManiaFileRepository maniaFileRepository;
+
+  @Autowired
+  ManiaRecommendRepository maniaRecommendRepository;
 
   @Override
   public List<Mania> maniaList(int page) {
@@ -136,6 +140,15 @@ public class ManiaServiceImpl implements ManiaService {
   public void count(Long mId) {
     
     maniaRepository.count(mId);
+
+  }
+
+  @Override
+  public void mrcmd(Long mId, Long uId) {
+   
+
+
+    // maniaRecommendRepository.save(entity)
 
   }
 
