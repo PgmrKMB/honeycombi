@@ -25,18 +25,18 @@
                 <th>조회수</th>
             </tr>
             
-            <tr th:each="vegan : ${list}" >
-                <td th:text="${vegan.vId}"></td>
-                <td><a th:href="@{/vegan/detail(vId=${vegan.vId})}" th:text="${vegan.vSubject}"></a></td>
-                <td th:text="${vegan.user.nickname}"></td>
-                <td th:text="${vegan.createDate}"></td>
-                <td th:text="${vegan.vHit}"></td>
+            <tr th:each="honey : ${list}" >
+                <td th:text="${honey.hId}"></td>
+                <td><a th:href="@{/honey/detail(hId=${honey.hId})}" th:text="${honey.hSubject}"></a></td>
+                <td th:text="${honey.user.nickname}"></td>
+                <td th:text="${honey.createDate}"></td>
+                <td th:text="${honey.hHit}"></td>
             </tr>
         </table>
     </div>
 
-<a th:href="@{/vegan/create}">
-    <button type="button" class="btn btn-dark" id="bbd" location.href='/vegan/create' >글쓰기</button>
+<a th:href="@{/honey/create}">
+    <button type="button" class="btn btn-dark" id="bbd" location.href='/honey/create' >글쓰기</button>
 </a>
 
     <script>

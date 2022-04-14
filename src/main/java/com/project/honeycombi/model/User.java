@@ -33,5 +33,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     List<Vegan> vegans = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    List<Honey> honeys = new ArrayList<>();
  
 }
