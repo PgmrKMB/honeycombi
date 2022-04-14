@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="ko">
 
-<head>
-    <meta charset="utf-8">
-    <title>VEGAN 게시판</title>
-</head>
 
-<body>
+    <head th:replace="common/head"></head>
+
+    <body>
+    <nav th:replace="common/navbar"></nav>
 
 
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+        <!-- <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item ">
                     <a th:if="${session.user != null}" class="nav-link" th:href="@{/signout}"
@@ -17,7 +16,7 @@
                     <a th:unless="${session.user != null}" class="nav-link" th:href="@{/}" th:text="로그인"></a>
                 </li>
             </ul>
-        </div>
+        </div> -->
    
     <div class="container my-3" >
         <table class="table" border="5" bordercolor="red">
@@ -73,6 +72,8 @@
         document.body.innerHTML += html;
         
     </script>
+
+<footer th:replace="common/footer"></footer>
 
 
 </body>
