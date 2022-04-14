@@ -66,17 +66,4 @@ public class UserController {
     
     
 
-    @GetMapping(value="/mypage")
-    public String mypage(HttpSession session, Model model) {
-
-       User user =(User) session.getAttribute("user");
-
-       List<Mania> mwList = userService.myWriting(user);
-
-        model.addAttribute("mwlist", mwList);
-
-        return "mypage";
-    }
-    
-
 }

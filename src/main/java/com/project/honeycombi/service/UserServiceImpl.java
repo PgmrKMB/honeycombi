@@ -45,5 +45,12 @@ public class UserServiceImpl implements UserService {
 
         return opt;
     }
+
+    @Override
+    public void deleteAcc(User user) {
+       
+        userRepository.deleteById(user.getUId());
+        
+    }
     
 }
