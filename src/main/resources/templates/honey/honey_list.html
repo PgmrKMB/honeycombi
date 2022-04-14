@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+    
+
+    <head th:replace="common/head"></head>
+    <style>
+        #bbd{
+            display: block;
+            margin: auto;
+        }
+       
+    </style>
+
+<body>
+    <head th:replace="common/head"></head>
+    <nav th:replace="common/navbar"></nav>
+    
+    <div class="container my-3" style="margin-top:50px;">
+        <table class="table">
+            <tr class="text-center thead-dark">
+                <th>글번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+            </tr>
+            
+            <tr th:each="honey : ${list}" >
+                <td th:text="${honey.hId}"></td>
+                <td><a th:href="@{/honey/detail(hId=${honey.hId})}" th:text="${honey.hSubject}"></a></td>
+                <td th:text="${honey.user.nickname}"></td>
+                <td th:text="${honey.createDate}"></td>
+                <td th:text="${honey.hHit}"></td>
+            </tr>
+        </table>
+    </div>
+
+<a th:href="@{/honey/create}">
+    <button type="button" class="btn btn-dark" id="bbd" location.href='/honey/create' >글쓰기</button>
+</a>
+
+    <script>
+        //쿼리 스트링, 쿼리 파라미터
+        // ?page=1
+        
+        let query = location.search;
+        
+        let page = query.substring(query.indexOf("=")+1);
+        
+        let startPage = parseInt(page / 5) * 5 + 1;
+       
+        let endPage = startPage + 4;
+        
+
+        
+        let html = '<ul class="pagination">';
+                                                     
+        html += `<li class="page-item"><a class="page-link" href="?page=${startPage-5}">Previous</a></li>`    
+        for(let i = startPage; i <= endPage; i++) {
+         
+        html += 
+        `<li class="page-item ${page == i ? 'active' : ' ' }">
+            <a class="page-link" href= "?page=${i}">${i}</a>
+        </li>`;
+        }
+        html += `<li class="page-item"><a class="page-link" href="?page=${endPage+1}">Next</a></li>`
+
+        html += '</ul>';
+        document.body.innerHTML += html;
+        
+    </script>
+
+
+
+
+<footer th:replace="common/footer"></footer>
+
+</body>
+
+</html>
