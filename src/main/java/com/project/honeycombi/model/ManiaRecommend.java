@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -19,4 +22,5 @@ public class ManiaRecommend {
 
     @ManyToOne
     Mania mania;
+
 }
