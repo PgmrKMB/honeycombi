@@ -8,10 +8,15 @@
       min-height:200px;
   }
 
+  html, body{
+      height: 100%;
+  }
+
   #wrapper{
-  height: auto;
+  /* height: auto; */
   min-height: 100%;
-  padding-bottom: 170px;
+  padding-bottom: 200px;
+  position: relative;
 }
 
   /* Hide the carousel text when the screen is less than 600 pixels wide */
@@ -21,8 +26,8 @@
     }
   }
   </style>
-<head th:replace="common/head"></head>
 <body>
+<head th:replace="common/head"></head>
 
 <nav th:replace="common/navbar"></nav><br>
 
@@ -87,7 +92,7 @@
       </div>
     </div>
   </div>
-</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
 
 <footer th:replace="common/footer"></footer>
 

@@ -8,11 +8,13 @@
             display: block;
             margin: auto;
         }
+       
     </style>
 
-    <body>
+<body>
+    <head th:replace="common/head"></head>
     <nav th:replace="common/navbar"></nav>
-   
+    
     <div class="container my-3" style="margin-top:50px;">
         <table class="table">
             <tr class="text-center thead-dark">
@@ -22,7 +24,7 @@
                 <th>작성일시</th>
                 <th>조회수</th>
             </tr>
-
+            
             <tr th:each="vegan : ${list}" >
                 <td th:text="${vegan.vId}"></td>
                 <td><a th:href="@{/vegan/detail(vId=${vegan.vId})}" th:text="${vegan.vSubject}"></a></td>
@@ -32,10 +34,11 @@
             </tr>
         </table>
     </div>
-    <a th:href="@{/vegan/create}">
+
+<a th:href="@{/vegan/create}">
     <button type="button" class="btn btn-dark" id="bbd" location.href='/vegan/create' >글쓰기</button>
-    </a>
-    
+</a>
+
     <script>
         //쿼리 스트링, 쿼리 파라미터
         // ?page=1
@@ -67,8 +70,10 @@
         
     </script>
 
-<footer th:replace="common/footer"></footer>
 
+
+
+<footer th:replace="common/footer"></footer>
 
 </body>
 
