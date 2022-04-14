@@ -23,7 +23,10 @@
           <li><a href="/vegan/list">Vegan 게시판</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a th:href="@{/signout}" th:if="${session.user != null}"><span class="glyphicon glyphicon-log-in"></span> [[${session.user.nickname}]]님 환영합니다😊 Logout</a></li>
+          <li><a th:href="@{/sign}" th:unless="${session.user != null}"><span class="glyphicon glyphicon-log-out"></span> Login</a></li>
+
+
         </ul>
       </div>
     </div>
