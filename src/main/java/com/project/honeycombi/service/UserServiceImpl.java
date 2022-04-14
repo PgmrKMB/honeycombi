@@ -3,6 +3,9 @@ package com.project.honeycombi.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+
 import com.project.honeycombi.model.Mania;
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.repository.ManiaRepository;
@@ -47,9 +50,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteAcc(User user) {
        
-        userRepository.deleteById(user.getUId());
+        userRepository.deleteByEmail(user.getEmail());
         
     }
     

@@ -42,15 +42,25 @@ public class MypageController {
 
         Optional<User> opt = userService.signin(user);
 
+        String redir ="";
+
         if(opt.isPresent()){
             
             userService.deleteAcc(user);
+
+            session.invalidate();
+
+            model.addAttribute("delacc_result", "succ");
+
+            redir = "redirect:/main";
         
         }else{
-            model.addAttribute("errorAcc", "이메일 또는 비밀번호를 잘못 입력하셨습니다.");
+            model.addAttribute("delacc_result", "fail");
+
+            redir = "redirect:/mypage";
         }
 
-        return "redirect:/mypage";
+        return redir;
     }
     
 
