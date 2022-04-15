@@ -40,6 +40,9 @@ public class Vegan {
 
 	@OneToMany(mappedBy = "vegan", cascade = CascadeType.REMOVE)
 	List<VeganFile> veganFiles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "vegan", cascade = CascadeType.REMOVE)
+	List<Answer> answers = new ArrayList<>();
 	
 
 }
