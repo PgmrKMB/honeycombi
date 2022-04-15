@@ -149,9 +149,15 @@ public class ManiaServiceImpl implements ManiaService {
     
     Mania maniarc = new Mania();
     maniarc.setMId(mId);
-
+    
     User userrc = new User();
     userrc.setUId(uId);
+    // int x = maniaRecommendRepository.count(uId);
+    // if(x == 0){
+
+    // }else if(x == 1){
+
+    // }
 
     ManiaRecommend dbmrcmd = new ManiaRecommend();
     dbmrcmd.setMania(maniarc);
