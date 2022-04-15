@@ -10,8 +10,10 @@ import com.project.honeycombi.model.Vegan;
 import com.project.honeycombi.repository.AnswerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Controller
 public class AnswerController {
 
     @Autowired
@@ -28,6 +30,8 @@ public class AnswerController {
  
        User user = (User) session.getAttribute("user");
         answer.setUser(user);
+
+        answer.setVegan(vegan);
 
         answerRepository.save(answer);
 
