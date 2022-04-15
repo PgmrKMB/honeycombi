@@ -40,6 +40,9 @@ public class Honey {
 
 	@OneToMany(mappedBy = "honey", cascade = CascadeType.REMOVE)
 	List<HoneyFile> honeyFiles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "honey", cascade = CascadeType.REMOVE)
+    List<Answer> answers = new ArrayList<>();
 	
 
 }
