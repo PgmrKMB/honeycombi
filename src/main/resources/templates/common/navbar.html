@@ -27,6 +27,8 @@
           <li><a href="/honey/list">꿀조합 게시판</a></li>
           <li><a href="/mania">Food 게시판</a></li>
           <li><a href="/vegan/list">Vegan 게시판</a></li>
+          <li th:if="${session.user != null}"><a href="/mypage">MyPage</a></li>
+          <li th:unless="${session.user != null}" style="display: none;"><a href="/mypage">MyPage</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a th:href="@{/signout}" th:if="${session.user != null}"><span class="glyphicon glyphicon-log-in"></span> [[${session.user.nickname}]]님 환영합니다😊 Logout</a></li>
