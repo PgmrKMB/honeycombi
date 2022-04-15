@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
@@ -114,9 +115,15 @@ public class ManiaController {
     }
 
     @PostMapping(value = "/mania/recommend")
-    public void mrcmd(Long mId, Long uId){
+    @ResponseBody
+    public String mrcmd(Long mId, Long uId){
         
+        System.out.println(mId);
+        System.out.println(uId);
+
         maniaService.mrcmd(mId,uId);
+
+        return "aaa";
        
     }
 

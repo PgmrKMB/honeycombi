@@ -14,8 +14,6 @@ public class ManiaRecommend {
     @GeneratedValue
     Long mrId;
 
-    Integer mRec=0;
-
     @ManyToOne
     User user;
 

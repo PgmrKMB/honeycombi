@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.Mania;
 import com.project.honeycombi.model.ManiaFile;
+import com.project.honeycombi.model.ManiaRecommend;
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.repository.ManiaFileRepository;
 import com.project.honeycombi.repository.ManiaRecommendRepository;
@@ -84,7 +85,7 @@ public class ManiaServiceImpl implements ManiaService {
           mf.setMania(mania);
           maniaFileRepository.save(mf);
 
-          mFile.transferTo(new File("c:/study/" + oName));
+          mFile.transferTo(new File("c:/study/" + sName));
         } catch (IllegalStateException e) {
           e.printStackTrace();
         } catch (IOException e) {
@@ -145,10 +146,18 @@ public class ManiaServiceImpl implements ManiaService {
 
   @Override
   public void mrcmd(Long mId, Long uId) {
-   
+    
+    Mania maniarc = new Mania();
+    maniarc.setMId(mId);
 
+    User userrc = new User();
+    userrc.setUId(uId);
 
-    // maniaRecommendRepository.save(entity)
+    ManiaRecommend dbmrcmd = new ManiaRecommend();
+    dbmrcmd.setMania(maniarc);
+    dbmrcmd.setUser(userrc);
+
+    maniaRecommendRepository.save(dbmrcmd);
 
   }
 
