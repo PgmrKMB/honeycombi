@@ -61,6 +61,15 @@ public class HoneyServiceImpl implements HoneyService {
         
     }
 
+    @Override
+    public List<Honey> list() {
+  
+        Page<Honey> p = honeyRepository.findAll(PageRequest.of(0, 3, Sort.Direction.DESC, "createDate"));
+        List<Honey> hlist = p.getContent();
+
+        return hlist;
+    }
+
   
 
     

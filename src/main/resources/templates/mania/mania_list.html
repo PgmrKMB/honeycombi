@@ -37,14 +37,14 @@
     <div id="wrapper">
         <nav th:replace="common/navbar"></nav>
 
-        <div class="container my-3" style="margin-top:100px;">
+        <div class="container my-3" style="margin-top:150px;">
             <table class="table">
                 <tr class="text-center thead-dark">
                     <th>글번호</th>
                     <th>제목</th>
                     <th>글쓴이</th>
-                    <th>작성일</th>
-                    <th>조회</th>
+                    <th>작성일시</th>
+                    <th>조회수</th>
                 </tr>
                 <tr th:each="mania : ${list}">
                     <td th:text="${mania.mId}"></td>

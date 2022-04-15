@@ -21,6 +21,8 @@ public interface HoneyService {
 
     void hit(Long hId);
 
+    List<Honey> list();
+
 
 
     

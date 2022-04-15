@@ -30,4 +30,6 @@ public interface ManiaService {
 
     void mrcmd(Long mId, Long uId);
 
+    List<Mania> list();
+
 }

@@ -61,6 +61,13 @@ public class VeganServiceImpl implements VeganService {
         
     }
 
+    @Override
+    public List<Vegan> list() {
+        Page<Vegan> p = veganRepository.findAll(PageRequest.of(0, 3, Sort.Direction.DESC, "createDate"));
+        List<Vegan> vlist = p.getContent();
+        return vlist;
+    }
+
   
 
     

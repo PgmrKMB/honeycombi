@@ -161,4 +161,11 @@ public class ManiaServiceImpl implements ManiaService {
 
   }
 
+  @Override
+  public List<Mania> list() {
+    Page<Mania> p = maniaRepository.findAll(PageRequest.of(0, 3, Sort.Direction.DESC, "createDate"));
+        List<Mania> mlist = p.getContent();
+    return mlist;
+  }
+
 }

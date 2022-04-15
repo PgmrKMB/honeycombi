@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <style>
-    
+<style>
   .carousel-inner img {
-      width: 30%; /* Set width to 100% */
-      margin: auto;
-      min-height:200px;
+    width: 30%;
+    /* Set width to 100% */
+    margin: auto;
+    min-height: 200px;
   }
 
-  html, body{
-      height: 100%;
-  }
 
-  #wrapper{
-  /* height: auto; */
-  min-height: 100%;
-  padding-bottom: 200px;
-  position: relative;
-}
+
+  #wrapper {
+    /* height: auto; */
+    min-height: 100%;
+    padding-bottom: 200px;
+    position: relative;
+  }
 
   /* Hide the carousel text when the screen is less than 600 pixels wide */
   @media (max-width: 600px) {
     .carousel-caption {
-      display: none; 
+      display: none;
     }
   }
-  </style>
+</style>
+
 <body>
-<head th:replace="common/head"></head>
 
-<nav th:replace="common/navbar"></nav><br>
+  <head th:replace="common/head"></head>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <nav th:replace="common/navbar"></nav><br>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -41,19 +41,20 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="images/minchodan.jpg" alt="Image"  >
+        <img src="images/minchodan.jpg" alt="Image">
         <div class="carousel-caption">
-          <h3>민초단 VS 반민초단</h3>
-          <p>누가 민초를 치약맛이라 했나~ vs 치약을 왜 먹어?</p>
-        </div>      
+          <!-- <h3>민초단 VS 반민초단</h3>
+          <p>누가 민초를 치약맛이라 했나~ vs 치약을 왜 먹어?</p> -->
+        </div>
       </div>
 
       <div class="item">
-        <img src="https://item.kakaocdn.net/do/62583c7d1cd73fb8a1e9fe0a5cf80ceef43ad912ad8dd55b04db6a64cddaf76d" alt="Image">
+        <img src="https://item.kakaocdn.net/do/62583c7d1cd73fb8a1e9fe0a5cf80ceef43ad912ad8dd55b04db6a64cddaf76d"
+          alt="Image">
         <div class="carousel-caption">
           <h3>힘내요~</h3>
           <p>~~~~</p>
-        </div>      
+        </div>
       </div>
     </div>
 
@@ -66,41 +67,77 @@
       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-</div>
-  
-<div class="container text-center" id="wrapper">    
-  <h3>WEEKLY BEST CHOICE!!</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <a href="/honey/detail?hId=2">
-      <img src="images/icecream.jpg" width="1200" height="600" class="img-responsive" alt="Image">
-      <p style="font-size: 20px; font-weight: bold;">홈런볼+빵빠레</p>
-    </a> 
-    </div>
-    <div class="col-sm-4"> 
-      <a href="/honey/detail?hId=3">
-      <img src="images/sub.jpg" class="img-responsive" style="width:100%" alt="Image">
-      <p style="font-size: 20px; font-weight: bold;">서브웨이 꿀조합</p>
-    </a>   
-    </div>
-    <div class="col-sm-4"> 
-      <a href="/honey/detail?hId=4">
-      <img src="images/ramyeon.png" class="img-responsive" style="width:100%" alt="Image">
-      <p style="font-size: 20px; font-weight: bold;">라면 꿀조합</p>
-    </a>
-    </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>민초단, 집합!!!</p>
+  </div>
+  <br><br><br>
+  <div class="container text-center" id="wrapper">
+    <h3>WEEKLY BEST CHOICE!!</h3><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <a href="/honey/detail?hId=2">
+          <img src="images/icecream.jpg" width="1200" height="600" class="img-responsive" alt="Image">
+          <p style="font-size: 20px; font-weight: bold;">홈런볼+빵빠레</p>
+        </a>
       </div>
-      <div class="well">
-       <p>비건부추만두 레시피 공개</p>
+      <div class="col-sm-4">
+        <a href="/honey/detail?hId=3">
+          <img src="images/sub.jpg" class="img-responsive" style="width:100%" alt="Image">
+          <p style="font-size: 20px; font-weight: bold;">서브웨이 꿀조합</p>
+        </a>
       </div>
+      <div class="col-sm-4">
+        <a href="/honey/detail?hId=4">
+          <img src="images/ramyeon.png" class="img-responsive" style="width:100%" alt="Image">
+          <p style="font-size: 20px; font-weight: bold;">라면 꿀조합</p>
+        </a>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
+          <table class="table">
+            <tr class="text-center thead-dark">
+              <th>꿀조합 최신글</th>
+            </tr>
+
+            <tr th:each="honey : ${hlist}">
+              <td><a th:href="@{/honey/detail(hId=${honey.hId})}" th:text="${honey.hSubject}"></a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="well">
+          <table class="table">
+          <tr class="text-center thead-dark">
+            <th>FOOD 게시판 최신글</th>
+          </tr>
+
+          <tr th:each="mania : ${mlist}">
+            <td><a th:href="@{/mania/detail(mId=${mania.mId})}" th:text="${mania.mTitle}"></a></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="well">
+          <table class="table">
+          <tr class="text-center thead-dark">
+            <th>VEGAN 게시판 최신글</th>
+          </tr>
+
+          <tr th:each="vegan : ${vlist}">
+            <td><a th:href="@{/vegan/detail(vId=${vegan.vId})}" th:text="${vegan.vSubject}"></a></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+
+
     </div>
   </div>
-</div>
 
-<footer th:replace="common/footer"></footer>
 
 </body>
+<footer th:replace="common/footer"></footer>
+
 </html>

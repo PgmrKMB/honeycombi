@@ -21,6 +21,8 @@ public interface VeganService {
 
     void hit(Long vId);
 
+    List<Vegan> list();
+
 
 
     

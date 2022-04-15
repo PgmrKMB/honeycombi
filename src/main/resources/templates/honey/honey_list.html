@@ -8,6 +8,20 @@
             display: block;
             margin: auto;
         }
+
+        .pagination {
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+    }
+
+    .table {
+        text-align: center;
+    }
+
+    th {
+        text-align: center !important;
+    }
        
     </style>
 
@@ -15,7 +29,7 @@
     <head th:replace="common/head"></head>
     <nav th:replace="common/navbar"></nav>
     
-    <div class="container my-3" style="margin-top:50px;">
+    <div class="container my-3" style="margin-top:150px;">
         <table class="table">
             <tr class="text-center thead-dark">
                 <th>글번호</th>
@@ -34,11 +48,14 @@
             </tr>
         </table>
     </div>
+    <br>
+    <hr><br>
 
 <a th:href="@{/honey/create}">
     <button type="button" class="btn btn-dark" id="bbd" location.href='/honey/create' >글쓰기</button>
 </a>
 
+<br><br>
     <script>
         //쿼리 스트링, 쿼리 파라미터
         // ?page=1
@@ -55,7 +72,7 @@
         
         let html = '<ul class="pagination">';
                                                      
-        html += `<li class="page-item"><a class="page-link" href="?page=${startPage-5}">Previous</a></li>`    
+        html += `<li class="page-item"><a class="page-link" href="?page=${startPage-5}">이전</a></li>`    
         for(let i = startPage; i <= endPage; i++) {
          
         html += 
@@ -63,7 +80,7 @@
             <a class="page-link" href= "?page=${i}">${i}</a>
         </li>`;
         }
-        html += `<li class="page-item"><a class="page-link" href="?page=${endPage+1}">Next</a></li>`
+        html += `<li class="page-item"><a class="page-link" href="?page=${endPage+1}">다음</a></li>`
 
         html += '</ul>';
         document.body.innerHTML += html;

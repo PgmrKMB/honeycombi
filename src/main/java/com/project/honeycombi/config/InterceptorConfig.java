@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         .addInterceptor(signInCheckInterceptor)
         .addPathPatterns("/**")
         .excludePathPatterns("/main","/sign","/signup","/signin","/images/**","/css/**","/js/**","/user/check",
-        "/mania","/vegan/list", "/contact", "/haney/list");
+         "/mania","/vegan/list", "/contact", "/honey/list");
 
         WebMvcConfigurer.super.addInterceptors(registry);
     }

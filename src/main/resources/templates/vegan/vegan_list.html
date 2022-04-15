@@ -28,7 +28,7 @@
     <div id="wrapper">
         <nav th:replace="common/navbar"></nav>
 
-        <div class="container my-3" style="margin-top:100px;">
+        <div class="container my-3" style="margin-top:150px;" > 
             <table class="table">
                 <tr class="text-center thead-dark">
                     <th>글번호</th>
@@ -68,7 +68,7 @@
 
             let html = '<ul class="pagination">';
 
-            html += `<li class="page-item"><a class="page-link" href="?page=${startPage - 5}">Previous</a></li>`
+            html += `<li class="page-item"><a class="page-link" href="?page=${startPage - 5}">이전</a></li>`
             for (let i = startPage; i <= endPage; i++) {
 
                 html +=
@@ -76,7 +76,7 @@
             <a class="page-link" href= "?page=${i}">${i}</a>
         </li>`;
             }
-            html += `<li class="page-item"><a class="page-link" href="?page=${endPage + 1}">Next</a></li>`
+            html += `<li class="page-item"><a class="page-link" href="?page=${endPage + 1}">다음</a></li>`
 
             html += '</ul>';
             document.body.innerHTML += html;
