@@ -19,4 +19,5 @@ public class ManiaRecommend {
 
     @ManyToOne
     Mania mania;
+
 }

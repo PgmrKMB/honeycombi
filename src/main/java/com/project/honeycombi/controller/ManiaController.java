@@ -2,9 +2,6 @@ package com.project.honeycombi.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
@@ -103,7 +101,7 @@ public class ManiaController {
         if (opt.isPresent()) {
             model.addAttribute("mania", opt.get());
         } else {
-            model.addAttribute("err", "잘못된 요청입니다.");
+            model.addAttribute("mupdate_r", "fail");
         }
 
         return "/mania/mania_update";
@@ -114,6 +112,19 @@ public class ManiaController {
         maniaService.updatePost(mId, mania);
 
         return "redirect:/mania/detail?mId=" + mId;
+    }
+
+    @PostMapping(value = "/mania/recommend")
+    @ResponseBody
+    public String mrcmd(Long mId, Long uId){
+        
+        System.out.println(mId);
+        System.out.println(uId);
+
+        maniaService.mrcmd(mId,uId);
+
+        return "aaa";
+       
     }
 
 }

@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import com.project.honeycombi.model.Mania;
 import com.project.honeycombi.model.ManiaFile;
+import com.project.honeycombi.model.ManiaRecommend;
 import com.project.honeycombi.model.User;
 import com.project.honeycombi.repository.ManiaFileRepository;
+import com.project.honeycombi.repository.ManiaRecommendRepository;
 import com.project.honeycombi.repository.ManiaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class ManiaServiceImpl implements ManiaService {
 
   @Autowired
   ManiaFileRepository maniaFileRepository;
+
+  @Autowired
+  ManiaRecommendRepository maniaRecommendRepository;
 
   @Override
   public List<Mania> maniaList(int page) {
@@ -80,7 +85,7 @@ public class ManiaServiceImpl implements ManiaService {
           mf.setMania(mania);
           maniaFileRepository.save(mf);
 
-          mFile.transferTo(new File("c:/study/" + oName));
+          mFile.transferTo(new File("c:/study/" + sName));
         } catch (IllegalStateException e) {
           e.printStackTrace();
         } catch (IOException e) {
@@ -136,6 +141,23 @@ public class ManiaServiceImpl implements ManiaService {
   public void count(Long mId) {
     
     maniaRepository.count(mId);
+
+  }
+
+  @Override
+  public void mrcmd(Long mId, Long uId) {
+    
+    Mania maniarc = new Mania();
+    maniarc.setMId(mId);
+
+    User userrc = new User();
+    userrc.setUId(uId);
+
+    ManiaRecommend dbmrcmd = new ManiaRecommend();
+    dbmrcmd.setMania(maniarc);
+    dbmrcmd.setUser(userrc);
+
+    maniaRecommendRepository.save(dbmrcmd);
 
   }
 

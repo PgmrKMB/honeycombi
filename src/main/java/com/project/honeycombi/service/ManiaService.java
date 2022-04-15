@@ -28,4 +28,6 @@ public interface ManiaService {
 
     void count(Long mId);
 
+    void mrcmd(Long mId, Long uId);
+
 }
