@@ -29,4 +29,8 @@ public class Answer {
     @ToString.Exclude
     Vegan vegan;
 
+    @ManyToOne
+    @ToString.Exclude
+    Honey honey;
+
 }

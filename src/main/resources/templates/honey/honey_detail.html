@@ -40,6 +40,41 @@
     </th:block>
 
 
+    <h5 class="border-bottom my-3 py-2" th:text="${#lists.size(honey.answers)} + '개의 답변이 있습니다.'"></h5>
+	<th:block th:each="answer : ${honey.answers}">
+    <a name="answer_{{ answer.id }}"></a>
+    <div class="row my-3">
+        <div class="col-11">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text" th:text="${answer.content}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div class="badge badge-light p-2 text-left">
+                            <div class="mb-2" th:text="${answer.user.nickname}"></div>
+                            <div th:text="${answer.createDate}"></div>
+                        </div>
+                    </div>
+                    <div th:if="${session.user.nickname} == ${answer.user.nickname}" class="my-3">
+                        <a class="btn btn-sm btn-outline-secondary">수정</a>
+                        <a class="delete btn btn-sm btn-outline-secondary">삭제</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</th:block>
+
+    <form action="/hanswer/create" method="post" class="my-3">
+    <input type= "hidden" name="hId" th:value="${honey.hId}">
+    <input type= "hidden" th:value="${param.hId}">  <!--  왜 쓰는지 도통 모르겠음. 이름도 없고. -->
+        <div class="form-group">
+            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+        <input type="submit" value="답변등록" class="btn btn-primary">
+    </form>
+
+
+
 
     
 

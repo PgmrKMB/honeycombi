@@ -40,8 +40,8 @@
     </th:block>
 
 
-    <h5 class="border-bottom my-3 py-2" th:text="${#lists.size('answerList')-1} + '개의 답변이 있습니다.'"></h5>
-	<th:block th:each="answer : ${answerList}">
+    <h5 class="border-bottom my-3 py-2" th:text="${#lists.size(vegan.answers)} + '개의 답변이 있습니다.'"></h5>
+	<th:block th:each="answer : ${vegan.answers}">
     <a name="answer_{{ answer.id }}"></a>
     <div class="row my-3">
         <div class="col-11">
@@ -50,11 +50,11 @@
                     <div class="card-text" th:text="${answer.content}"></div>
                     <div class="d-flex justify-content-end">
                         <div class="badge badge-light p-2 text-left">
-                            <div class="mb-2" th:text="${answer.user.name}"></div>
+                            <div class="mb-2" th:text="${answer.user.nickname}"></div>
                             <div th:text="${answer.createDate}"></div>
                         </div>
                     </div>
-                    <div th:if="${session.user.name} == ${answer.user.name}" class="my-3">
+                    <div th:if="${session.user.nickname} == ${answer.user.nickname}" class="my-3">
                         <a class="btn btn-sm btn-outline-secondary">수정</a>
                         <a class="delete btn btn-sm btn-outline-secondary">삭제</a>
                     </div>

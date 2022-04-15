@@ -2,9 +2,7 @@ package com.project.honeycombi.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -42,7 +40,6 @@ public class Mania {
     @OneToMany(mappedBy = "mania")
     List<ManiaRecommend> maniaRecommends = new ArrayList<>();
 
-    @OneToMany(mappedBy = "mania")
-    Set<ManiaRecommend> mrcmds = new HashSet<>();
+    
 
 }
