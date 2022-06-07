@@ -37,7 +37,7 @@ public class Mania {
     @OneToMany(mappedBy = "mania", cascade = CascadeType.REMOVE)
     List<ManiaFile> maniaFiles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "mania")
+    @OneToMany(mappedBy = "mania", cascade = CascadeType.REMOVE)
     List<ManiaRecommend> maniaRecommends = new ArrayList<>();
 
     

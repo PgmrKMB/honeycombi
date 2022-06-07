@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManiaRecommendRepository extends JpaRepository<ManiaRecommend, Long>{
+
+    void findByUser_uId(Long uId);
     
 }

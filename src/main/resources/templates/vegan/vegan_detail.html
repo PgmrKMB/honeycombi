@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VEGAN_DETAIL</title>
 </head>
+
 <head th:replace="common/head"></head>
+
 <body>
     <nav th:replace="common/navbar"></nav><br>
     <h5>비건디테일</h5>
     <table border="1" bordercolor="yellow">
         <tr>
-         <th>제목</th>
-         <td th:text="${vegan.vSubject}"></td>
+            <th>제목</th>
+            <td th:text="${vegan.vSubject}"></td>
         </tr>
         <tr>
-         <th>내용</th>
-         <td th:text="${vegan.vContent}"></td>
+            <th>내용</th>
+            <td th:text="${vegan.vContent}"></td>
         </tr>
         <tr>
-         <th>작성자</th>
-         <td th:text="${vegan.user.nickname}"></td>
+            <th>작성자</th>
+            <td th:text="${vegan.user.nickname}"></td>
         </tr>
         <tr>
-         <th>날짜</th>
-         <td th:text="${vegan.createDate}"></td>
+            <th>날짜</th>
+            <td th:text="${vegan.createDate}"></td>
         </tr>
-        
-        
+
+
     </table>
 
     <img th:src="@{/vegandownload(vId=${param.vId})}" style="width:150px;" onerror="this.src='/images/noimg.png'">
@@ -43,41 +46,31 @@
 
 
     <h5 class="border-bottom my-3 py-2" th:text="${#lists.size(vegan.answers)} + '개의 답변이 있습니다.'"></h5>
-	<th:block th:each="answer : ${vegan.answers}">
-    <a name="answer_{{ answer.id }}"></a>
-    <div class="row my-3">
-        <div class="col-11">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-text" th:text="${answer.content}"></div>
-                    <div class="d-flex justify-content-end">
-                        <div class="badge badge-light p-2 text-left">
-                            <div class="mb-2" th:text="${answer.user.nickname}"></div>
-                            <div th:text="${answer.createDate}"></div>
-                        </div>
-                    </div>
-                    <div th:if="${session.user.nickname} == ${answer.user.nickname}" class="my-3">
-                        <a class="btn btn-sm btn-outline-secondary">수정</a>
-                        <a class="delete btn btn-sm btn-outline-secondary">삭제</a>
-                    </div>
-                </div>
-            </div>
+    <th:block th:each="answer : ${vegan.answers}">
+        <div th:text="${answer.content}"></div>
+
+        <div th:text="${answer.user.nickname}"></div>
+        <div th:text="${answer.createDate}"></div>
         </div>
-    </div>
-	</th:block>
+        <div th:if="${session.user.nickname} == ${answer.user.nickname}" class="my-3">
+            <a>수정</a>
+            <a>삭제</a>
+        </div>
+    </th:block>
 
     <form action="/answer/create" method="post" class="my-3">
-    <input type= "hidden" name="vId" th:value="${vegan.vId}">
-    <input type= "hidden" th:value="${param.vId}">  <!--  왜 쓰는지 도통 모르겠음. 이름도 없고. -->
+        <input type="hidden" name="vId" th:value="${vegan.vId}">
+        <input type="hidden" th:value="${param.vId}"> <!--  왜 쓰는지 도통 모르겠음. 이름도 없고. -->
         <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
 
-    
+
 
 
 
 </body>
+
 </html>

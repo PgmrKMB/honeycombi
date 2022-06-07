@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>매니아 게시판</title>
 </head>
+
 <head th:replace="common/head"></head>
+
 <body>
     <nav th:replace="common/navbar"></nav><br>
     <h1 th:text="${mania.mTitle}"></h1>
@@ -17,6 +19,8 @@
     </div>
     <div>
         <img th:src="@{/maniadownload(mId=${param.mId})}" style="width:150px;" onerror="this.src='/images/noimg.png'">
+        <img th:src="@{/maniadownload2(mId=${param.mId})}" style="width:150px;" onerror="this.src='/images/noimg.png'">
+        <img th:src="@{/maniadownload3(mId=${param.mId})}" style="width:150px;" onerror="this.src='/images/noimg.png'">
     </div>
 
     <div>
@@ -27,9 +31,10 @@
     </div>
 
     <div th:if="${session.user} != null">
-        <div th:if="${session.user.nickname} == ${mania.user.nickname}"></div>
-        <a th:href="@{/mania/update(mId=${param.mId})}">수정</a>
-        <a th:href="@{/mania/delete(mId=${param.mId})}">삭제</a>
+        <div th:if="${session.user.nickname} == ${mania.user.nickname}">
+            <a th:href="@{/mania/update(mId=${param.mId})}">수정</a>
+            <a th:href="@{/mania/delete(mId=${param.mId})}">삭제</a>
+        </div>
     </div>
 
 
@@ -44,13 +49,13 @@
 
             if (img1.src.indexOf('_b') == -1) {
                 img1.src = img1.src.replace('.png', '_b.png');
-                
+
                 $.ajax({
                     type: 'POST',
                     url: '/mania/recommend',
                     data: {
-                        mId : "[[${mania.mId}]]",
-                        uId : "[[${session.user.uId}]]"
+                        mId: "[[${mania.mId}]]",
+                        uId: "[[${session.user.uId}]]"
                     },
                     success: function () {
                         alert("좋아요~")

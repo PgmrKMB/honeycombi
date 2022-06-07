@@ -87,6 +87,40 @@ public class ManiaController {
                         MediaType.parseMediaType("application/octet-stream"))
                 .body(resource);
     }
+    @GetMapping(value = "/maniadownload2")
+    public ResponseEntity<Resource> download2(@ModelAttribute Mania mania) throws Exception {
+
+        List<ManiaFile> fList = maniaService.download(mania);
+
+        String fileName = fList.get(1).getSaveFileName();
+        File file = new File("c:/study/" + fileName);
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity.ok()
+                .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
+                .contentLength(file.length())
+                .contentType(
+                        MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
+    }
+    @GetMapping(value = "/maniadownload3")
+    public ResponseEntity<Resource> download3(@ModelAttribute Mania mania) throws Exception {
+
+        List<ManiaFile> fList = maniaService.download(mania);
+
+        String fileName = fList.get(2).getSaveFileName();
+        File file = new File("c:/study/" + fileName);
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity.ok()
+                .header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
+                .contentLength(file.length())
+                .contentType(
+                        MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
+    }
 
     @GetMapping(value = "/mania/delete")
     public String maniaDelete(@RequestParam Long mId) {
